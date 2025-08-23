@@ -28,11 +28,13 @@ pipeline{
             }
             steps{
                 withSonarQubeEnv("${SONARQUBE}") {
-                    sh "${scannerHome}/bin/sonar-scanner \
+                    sh """
+                        ${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=FlaskDevSecOps \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=${SONAR_QUBE_TOKEN}"""
+                        -Dsonar.login=${SONAR_QUBE_TOKEN}
+                    """
                 }
             }
 
