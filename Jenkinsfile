@@ -27,7 +27,7 @@ pipeline{
                 scannerHome = tool 'SonarScanner'
             }
             steps{
-                withSonarQubeEnv("${SONARQUBE}") {
+                withSonarQubeEnv('MySonarServer') {
                     sh """
                         ${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=FlaskDevSecOps \
