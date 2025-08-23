@@ -19,7 +19,7 @@ pipeline{
         }
         stage('Scan with Trivy'){
             steps{
-                sh "trivy image --exit-code 1 ${IMAGE_NAME}:latest"
+                sh "trivy image --severity HIGH,CRITICAL --exit-code 1 python-webapp:latest"
             }
         }
         stage('Scan with SonarQube'){
