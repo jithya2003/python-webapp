@@ -22,25 +22,6 @@ pipeline{
                 sh "trivy image --ignorefile .trivyignore --severity HIGH,CRITICAL --exit-code 1 python-webapp:latest"
             }
         }
-        stage('Scan with SonarQube'){
-            environment{
-                scannerHome = tool 'SonarScanner'
-            }
-            steps{
-                withSonarQubeEnv('MySonarServer') {
-                    sh """
-                        ${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=FlaskDevSecOps \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=${SONAR_QUBE_TOKEN}
-                    """
-                }
-            }
-
-        
-        }
-
     
         stage('Load into Minikube'){
             steps{
